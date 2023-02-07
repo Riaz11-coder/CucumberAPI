@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class E2E_Tests {
     public static void main(String[] args) {
-        String userID = "9b5f49ab-eea9-45f4-9d66-bcf56a531b85";
-        String userName = "TOOLSQA-Test";
-        String password = "Test@@123";
+        String userID = "bb65059d-4bd1-44fd-a39c-c307083ca69d";
+        String userName = "Testing1234!";
+        String password = "passwordTest1234!";
         String baseUrl = "https://bookstore.toolsqa.com";
 
         RestAssured.baseURI = baseUrl;

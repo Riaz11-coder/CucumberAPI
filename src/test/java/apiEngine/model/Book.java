@@ -6,7 +6,7 @@ public class Book {
     public String title;
     public String subTitle;
     public String author;
-    public String published;
+    public String publish_date;
     public String publisher;
     public int pages;
     public String description;

@@ -33,12 +33,12 @@ public class EndPoints {
 
     public IRestResponse<Books> getBooks() {
         Response response = request.get(Route.books());
-        return new RestResponse(Books.class, response);
+        return new  RestResponse<>(Books.class, response);
     }
 
     public IRestResponse<UserAccount> addBook(AddBooksRequest addBooksRequest) {
         Response response = request.body(addBooksRequest).post(Route.books());
-        return new RestResponse(UserAccount.class, response);
+        return new RestResponse<>(UserAccount.class, response);
     }
 
     public Response removeBook(RemoveBookRequest removeBookRequest) {
@@ -47,6 +47,6 @@ public class EndPoints {
 
     public IRestResponse<UserAccount> getUserAccount(String userId) {
         Response response = request.get(Route.userAccount(userId));
-        return new RestResponse(UserAccount.class, response);
+        return new RestResponse<>(UserAccount.class, response);
     }
 }

@@ -1,6 +1,7 @@
 package apiEngine;
+
 import io.restassured.response.Response;
-public class RestResponse<T> implements IRestResponse {
+public class RestResponse<T> implements IRestResponse<T> {
 
     private T data;
     private Response response;
@@ -38,11 +39,14 @@ public class RestResponse<T> implements IRestResponse {
     }
 
 
-    public T getBody() {
+    public T getBody()  {
         try {
             data = (T) response.getBody().as(data.getClass());
         }catch (Exception e) {
             this.e=e;
+        }
+        finally{
+            data = (T) response.getBody().as(data.getClass());
         }
         return data;
     }

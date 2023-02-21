@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class ScenarioContext {
 
-    private Map<String, Object> scenarioContext;
+    private Map<String,Object> scenarioContext;
 
     public ScenarioContext(){
-        scenarioContext = new HashMap<String, Object>();
+        scenarioContext = new HashMap<>();
     }
 
     public void setContext(Context key, Object value) {

@@ -1,6 +1,10 @@
 package apiEngine.model.responses;
 
 public class Token {
+
+    public Token() {
+    }
+
     public String token;
     public String expires;
     public String status;

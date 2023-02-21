@@ -6,10 +6,14 @@ import apiEngine.model.requests.RemoveBookRequest;
 import apiEngine.model.responses.Books;
 import apiEngine.model.responses.Token;
 import apiEngine.model.responses.UserAccount;
+import apiEngine.model.responses.book;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EndPoints {
 
@@ -20,6 +24,7 @@ public class EndPoints {
         RestAssured.baseURI = baseUrl;
         request = RestAssured.given();
         request.header("Content-Type", "application/json");
+        request.header("accept","ContentType.JSON");
     }
 
     public void authenticateUser(AuthorizationRequest authRequest) {
@@ -43,6 +48,13 @@ public class EndPoints {
 
     public Response removeBook(RemoveBookRequest removeBookRequest) {
         return request.body(removeBookRequest).delete(Route.book());
+    }
+
+    public IRestResponse<book> getBookISBN(){
+        Map<String,String> paramsMap = new HashMap<>();
+        paramsMap.put("ISBN","9781449365035");
+        Response response = request.queryParams(paramsMap).get(Route.book());
+        return new RestResponse<>(book.class, response);
     }
 
     public IRestResponse<UserAccount> getUserAccount(String userId) {

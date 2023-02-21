@@ -1,10 +1,13 @@
-package apiEngine.model;
+package apiEngine.model.responses;
 
-public class Book {
-    public Book() {
+import java.util.List;
+
+public class book {
+
+    public book() {
     }
 
-    public Book(String isbn, String title, String subTitle, String author, String publish_date, String publisher, Integer pages, String description, String website) {
+    public book(String isbn, String title, String subTitle, String author, String publish_date, String publisher, Integer pages, String description, String website) {
         this.isbn = isbn;
         this.title = title;
         this.subTitle = subTitle;
@@ -18,7 +21,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "book{" +
                 "isbn='" + isbn + '\'' +
                 ", title='" + title + '\'' +
                 ", subTitle='" + subTitle + '\'' +
@@ -40,6 +43,7 @@ public class Book {
     public Integer pages;
     public String description;
     public String website;
+
 
 
 }

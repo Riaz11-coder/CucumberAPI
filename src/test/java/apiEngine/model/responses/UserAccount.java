@@ -5,7 +5,11 @@ import apiEngine.model.Book;
 import java.util.List;
 
 public class UserAccount {
-    public String userID;
+
+    public UserAccount() {
+    }
+
+    public String userId;
     public String userName;
     public List<Book> books;
 }

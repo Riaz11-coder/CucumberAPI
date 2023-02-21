@@ -13,7 +13,7 @@ public class ConfigReader {
 
     private ConfigReader() {
         BufferedReader reader;
-        String propertyFilePath = "configs//Configuration.properties";
+        String propertyFilePath = "configs//configuration.properties";
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
             properties = new Properties();
@@ -25,7 +25,7 @@ public class ConfigReader {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
+            throw new RuntimeException("configuration.properties not found at " + propertyFilePath);
         }
     }
 

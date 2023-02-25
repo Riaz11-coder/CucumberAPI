@@ -1,10 +1,9 @@
 package stepDefinitions;
 
 import apiEngine.IRestResponse;
-import apiEngine.RestResponse;
 import apiEngine.model.Book;
+import apiEngine.model.responses.Books;
 import apiEngine.model.responses.UserAccount;
-import apiEngine.model.responses.book;
 import cucumber.TestContext;
 import enums.Context;
 import io.cucumber.java.en.Then;
@@ -20,14 +19,17 @@ public class VerificationSteps extends BaseStep{
     @Then("^The book is added$")
     public void bookIsAdded() {
         Book book = (Book) getScenarioContext().getContext(Context.BOOK);
-        String userId = (String) getScenarioContext().getContext(Context.USER_ID);
+
         IRestResponse<UserAccount> userAccountResponse = (IRestResponse<UserAccount>) getScenarioContext().getContext(Context.USER_ACCOUNT_RESPONSE);
-        System.out.println(book);
+
+        System.out.println(userAccountResponse.getResponse().asPrettyString());
+
+
 
         Assert.assertTrue(userAccountResponse.isSuccessful());
         Assert.assertEquals(201, userAccountResponse.getStatusCode());
 
-        Assert.assertEquals(userId, userAccountResponse.getBody().userId);
+
         Assert.assertEquals(book.isbn, userAccountResponse.getBody().books.get(0).isbn);
     }
 
@@ -38,17 +40,26 @@ public class VerificationSteps extends BaseStep{
 
         Assert.assertEquals(204, response.getStatusCode());
 
+
         IRestResponse<UserAccount> userAccountResponse = getEndPoints().getUserAccount(userId);
         Assert.assertEquals(200, userAccountResponse.getStatusCode());
+        Assert.assertEquals(userId,userAccountResponse.getBody().userId);
 
         Assert.assertEquals(0, userAccountResponse.getBody().books.size());
+        System.out.println(userAccountResponse.getResponse().asPrettyString());
     }
 
 
     @Then("I should be returned a book")
     public void iShouldBeReturnedABook() {
-        book books = (book) getScenarioContext().getContext(Context.BOOK);
-        System.out.println(books);
+        //Books book = (Books) getScenarioContext().getContext(Context.BOOK);
+
+        IRestResponse<Books> bookResponse = (IRestResponse<Books>) getScenarioContext().getContext(Context.BOOK);
+
+        System.out.println(bookResponse.isSuccessful());
+        System.out.println(bookResponse.getStatusCode());
+        System.out.println(bookResponse.getStatusDescription());
+        System.out.println(bookResponse.getResponse().asPrettyString());
 
 
     }

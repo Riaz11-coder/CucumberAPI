@@ -1,18 +1,23 @@
 package apiEngine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.restassured.response.Response;
 
-public class RestResponse<T>  implements IRestResponse<T> {
-ObjectMapper objectMapper = new ObjectMapper();
+import java.io.Serializable;
+
+public class RestResponse <T> implements IRestResponse<T> {
+
     private T data;
     private Response response;
     private Exception e;
 
+
+
     public RestResponse(Class<T> t, Response response) {
         this.response = response;
         try{
-            this.data = t.getDeclaredConstructor().newInstance();
+            this.data = t.newInstance();
         }catch (Exception e){
             e.printStackTrace();
             throw new RuntimeException("There should be a default constructor in the Response POJO");
@@ -44,18 +49,16 @@ ObjectMapper objectMapper = new ObjectMapper();
 
 
     public T getBody()  {
-        try {
-            data = (T) response.body().as(data.getClass());
 
-        }catch (Exception e) {
-            this.e=e;
+        try {
+            data = (T) response.getBody().as(data.getClass());
+        } catch (Exception e) {
+            this.e = e;
             System.out.println(e.getMessage());
             e.printStackTrace();
-        }
-        finally {
-            data = (T) response.body().as(data.getClass());
-        }
+            throw new RuntimeException("this is the problem");
 
+        }
 
         return data;
     }

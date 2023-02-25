@@ -7,7 +7,6 @@ import apiEngine.model.requests.ISBN;
 import apiEngine.model.requests.RemoveBookRequest;
 import apiEngine.model.responses.Books;
 import apiEngine.model.responses.UserAccount;
-import apiEngine.model.responses.book;
 import cucumber.TestContext;
 import enums.Context;
 import io.cucumber.java.en.Given;
@@ -16,10 +15,6 @@ import io.restassured.response.Response;
 
 public class BookSteps extends BaseStep{
 
-
-
-
-
     public BookSteps(TestContext testContext) {
         super(testContext);
     }
@@ -27,9 +22,9 @@ public class BookSteps extends BaseStep{
     @Given("^A list of books are available$")
     public void listOfBooksAreAvailable() {
         IRestResponse<Books> booksResponse = getEndPoints().getBooks();
-        Book book = booksResponse.getBody().books.get(1);
+        Book book = booksResponse.getBody().books.get(0);
         getScenarioContext().setContext(Context.BOOK, book);
-        System.out.println(book);
+
     }
 
     @When("^I add a book to my reading list$")
@@ -59,9 +54,10 @@ public class BookSteps extends BaseStep{
 
     @When("I search for a book")
     public void iSearchForABook() {
-        IRestResponse<book> bookResponse = getEndPoints().getBookISBN();
-        book books = bookResponse.getBody();
-        getScenarioContext().setContext(Context.BOOK, books);
+
+        IRestResponse<Books> bookResponse = getEndPoints().getBookISBN();
+        getScenarioContext().setContext(Context.BOOK, bookResponse);
+
     }
 
 

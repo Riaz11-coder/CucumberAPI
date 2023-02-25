@@ -65,10 +65,17 @@ public class E2E_Tests {
 
 
         //Step - 4
-        // Delete a book - with Auth
-        request.header("Authorization", "Bearer " + token)
-                .header("Content-Type", "application/json");
+        // Delete a book
 
+        //Delete all Books with query requiring userId
+
+//        Map<String,String> paramsMap = new HashMap<>();
+//        paramsMap.put("UserId","bb65059d-4bd1-44fd-a39c-c307083ca69d");
+
+        //response = request.queryParams(paramsMap).delete("/BookStore/v1/Books");
+
+
+        //Delete last Book with isbn and userId
         response = request.body("{ \"isbn\": \"" + bookId + "\", \"userId\": \"" + userID + "\"}")
                 .delete("/BookStore/v1/Book");
 
@@ -76,8 +83,7 @@ public class E2E_Tests {
 
         //Step - 5
         // Get User
-        request.header("Authorization", "Bearer " + token)
-                .header("Content-Type", "application/json");
+
 
         response = request.get("/Account/v1/User/" + userID);
         Assert.assertEquals(200, response.getStatusCode());

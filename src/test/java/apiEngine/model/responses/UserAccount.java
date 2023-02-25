@@ -6,10 +6,13 @@ import java.util.List;
 
 public class UserAccount {
 
-    public UserAccount() {
-    }
+
+    public String code;
+    public String message;
 
     public String userId;
-    public String userName;
+    public String username;
     public List<Book> books;
+
+
 }

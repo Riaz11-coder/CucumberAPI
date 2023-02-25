@@ -6,7 +6,6 @@ import apiEngine.model.requests.RemoveBookRequest;
 import apiEngine.model.responses.Books;
 import apiEngine.model.responses.Token;
 import apiEngine.model.responses.UserAccount;
-import apiEngine.model.responses.book;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -50,11 +49,11 @@ public class EndPoints {
         return request.body(removeBookRequest).delete(Route.book());
     }
 
-    public IRestResponse<book> getBookISBN(){
+    public IRestResponse<Books> getBookISBN(){
         Map<String,String> paramsMap = new HashMap<>();
         paramsMap.put("ISBN","9781449365035");
         Response response = request.queryParams(paramsMap).get(Route.book());
-        return new RestResponse<>(book.class, response);
+        return new RestResponse<>(Books.class, response);
     }
 
     public IRestResponse<UserAccount> getUserAccount(String userId) {

@@ -1,5 +1,5 @@
 Feature: GET request returns book based on ISBN number search
-  Description: GET request requires query param {ISBN} to search for and return JSON body
+  Description: GET request requires query param {ISBN} to search for and return JSON response
   that includes all parameters of book, Title, Author, etc.
 
 

@@ -56,6 +56,12 @@ public class EndPoints {
         return new RestResponse<>(Books.class, response);
     }
 
+    public IRestResponse<UserAccount> authorizedUser(AuthorizationRequest authRequest){
+        Response response = request.body(authRequest).post(Route.authorized());
+        return new RestResponse<>(UserAccount.class,response);
+
+    }
+
     public IRestResponse<UserAccount> getUserAccount(String userId) {
         Response response = request.get(Route.userAccount(userId));
         return new RestResponse<>(UserAccount.class, response);

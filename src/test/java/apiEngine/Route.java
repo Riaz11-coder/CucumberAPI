@@ -12,6 +12,10 @@ public class Route {
         return ACCOUNT + VERSION + "/GenerateToken";
     }
 
+    public static String authorized(){
+        return ACCOUNT + VERSION + "/Authorized";
+    }
+
     public static String books(){
         return BOOKSTORE + VERSION + "/Books";
     }

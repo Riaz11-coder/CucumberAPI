@@ -63,4 +63,14 @@ public class VerificationSteps extends BaseStep{
 
 
     }
+
+    @Then("I should receive response body object verifying my authorization")
+    public void iShouldReceiveResponseBodyObjectVerifyingMyAuthorization() {
+
+        IRestResponse<UserAccount> userAccountResponse = (IRestResponse<UserAccount>) getScenarioContext().getContext(Context.USER_ACCOUNT_RESPONSE);
+
+        System.out.println(userAccountResponse.isSuccessful());
+        System.out.println(userAccountResponse.getStatusCode());
+        System.out.println(userAccountResponse.getResponse().asPrettyString());
+    }
 }

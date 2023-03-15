@@ -1,10 +1,6 @@
 package apiEngine;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import io.restassured.response.Response;
-
-import java.io.Serializable;
 
 public class RestResponse <T> implements IRestResponse<T> {
 

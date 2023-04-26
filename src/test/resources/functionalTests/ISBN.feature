@@ -7,7 +7,7 @@ Feature: GET request returns book based on ISBN number search
 
   Background: User generates token for Authorization
     Given I am an authorized user
-
+    @Regression
     Scenario: Authorized user should be able to search for and add a book using {ISBN}
       When  I search for a book
       Then  I should be returned a book

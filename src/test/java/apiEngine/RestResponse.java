@@ -13,7 +13,7 @@ public class RestResponse <T> implements IRestResponse<T> {
     public RestResponse(Class<T> t, Response response) {
         this.response = response;
         try{
-            this.data = t.newInstance();
+            this.data = t.getDeclaredConstructor().newInstance();
         }catch (Exception e){
             e.printStackTrace();
             throw new RuntimeException("There should be a default constructor in the Response POJO");

@@ -22,7 +22,7 @@ public class RestResponse <T> implements IRestResponse<T> {
     }
 
     public String getContent() {
-        return response.getBody().asString();
+        return response.getBody().asPrettyString();
     }
 
     public int getStatusCode() {

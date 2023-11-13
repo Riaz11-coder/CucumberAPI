@@ -60,5 +60,10 @@ public class BookSteps extends BaseStep{
 
     }
 
+    @When("I search for all books")
+    public void iSearchForAllBooks() {
 
+        IRestResponse<Books> AllBookResponse = getEndPoints().getBooks();
+        getScenarioContext().setContext(Context.BOOK,AllBookResponse);
+    }
 }

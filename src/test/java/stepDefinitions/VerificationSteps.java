@@ -73,4 +73,26 @@ public class VerificationSteps extends BaseStep{
         System.out.println(userAccountResponse.getStatusCode());
         System.out.println(userAccountResponse.getResponse().asPrettyString());
     }
+
+    @Then("I receive a list of all books")
+    public void iReceiveAListOfAllBooks() {
+        IRestResponse<Books> bookResponse = (IRestResponse<Books>) getScenarioContext().getContext(Context.BOOK);
+
+        String statusDescription = "HTTP/1.1 200 OK";
+        Assert.assertEquals(200, bookResponse.getStatusCode());
+        Assert.assertEquals(statusDescription,bookResponse.getStatusDescription());
+        Assert.assertTrue(bookResponse.isSuccessful());
+        Assert.assertEquals(8,bookResponse.getBody().books.size());
+
+
+        String expectedBookTitle = "Git Pocket Guide";
+        String actualBookTitle = bookResponse.getBody().books.get(0).title;
+
+        Assert.assertEquals(expectedBookTitle,actualBookTitle);
+
+
+
+
+
+    }
 }

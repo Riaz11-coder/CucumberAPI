@@ -5,7 +5,7 @@ Feature: End to End Tests for ToolsQA's Book Store API
 
   Background: User generates token for Authorization
     Given I am an authorized user
- @Regression
+
   Scenario: Authorized user is able to Add and Remove a book.
     Given A list of books are available
     When I add a book to my reading list

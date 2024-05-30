@@ -2,8 +2,10 @@ package apiEngine;
 
 import apiEngine.model.requests.AddBooksRequest;
 import apiEngine.model.requests.AuthorizationRequest;
+import apiEngine.model.requests.LoginRequest;
 import apiEngine.model.requests.RemoveBookRequest;
 import apiEngine.model.responses.Books;
+import apiEngine.model.responses.LoginResponse;
 import apiEngine.model.responses.Token;
 import apiEngine.model.responses.UserAccount;
 import io.restassured.RestAssured;
@@ -18,6 +20,8 @@ public class EndPoints {
 
 
     private final RequestSpecification request;
+
+
 
     public EndPoints(String baseUrl) {
         RestAssured.baseURI = baseUrl;
@@ -60,6 +64,19 @@ public class EndPoints {
         Response response = request.body(authRequest).post(Route.authorized());
         return new RestResponse<>(UserAccount.class,response);
 
+    }
+
+    public void LoginUser(LoginRequest loginRequest) {
+        Response response = request.body(loginRequest).post(Route.login());
+        if (response.statusCode() != HttpStatus.SC_OK)
+            throw new RuntimeException("Authentication Failed. Content of failed Response: " + response.toString() + " , Status Code : " + response.statusCode());
+
+        Token tokenResponse = response.body().jsonPath().getObject("$", Token.class);
+        request.header("Authorization", "Bearer " + tokenResponse.token);
+    }
+    public IRestResponse<LoginResponse> AuthenticateUser(LoginRequest loginRequest){
+        Response response =request.body(loginRequest).post(Route.login());
+        return new RestResponse<>(LoginResponse.class,response);
     }
 
     public IRestResponse<UserAccount> getUserAccount(String userId) {

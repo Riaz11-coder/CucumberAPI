@@ -3,6 +3,7 @@ package stepDefinitions;
 import apiEngine.IRestResponse;
 import apiEngine.model.Book;
 import apiEngine.model.responses.Books;
+import apiEngine.model.responses.LoginResponse;
 import apiEngine.model.responses.UserAccount;
 import cucumber.TestContext;
 import enums.Context;
@@ -90,5 +91,30 @@ public class VerificationSteps extends BaseStep{
 
         Assert.assertEquals(expectedBookTitle,actualBookTitle);
         System.out.println("ngrok tunnel test");
+    }
+
+    @Then("I should receive a successful login response with a token")
+    public void iShouldReceiveASuccessfulLoginResponseWithAToken() {
+
+        IRestResponse<LoginResponse> loginResponse = (IRestResponse<LoginResponse>) getScenarioContext().getContext(Context.LOGIN_RESPONSE);
+
+        System.out.println(loginResponse.isSuccessful());
+        System.out.println(loginResponse.getStatusCode());
+        System.out.println(loginResponse.getResponse().asPrettyString());
+
+    }
+
+    @Then("I should receive an unsuccessful response.")
+    public void iShouldReceiveAnUnsuccessfulResponse() {
+        IRestResponse<LoginResponse> loginResponse = (IRestResponse<LoginResponse>) getScenarioContext().getContext(Context.LOGIN_RESPONSE);
+
+        System.out.println(loginResponse.isSuccessful());
+        System.out.println(loginResponse.getStatusCode());
+        System.out.println(loginResponse.getResponse().asPrettyString());
+
+        int expected = 200;
+        int actual = loginResponse.getStatusCode();
+
+        Assert.assertEquals(expected,actual);
     }
 }

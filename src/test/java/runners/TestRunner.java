@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
                 "junit:target/cucumber-reports/Cucumber.xml",
                 "html:target/cucumber-report.html" },
         monochrome = true,
-        tags = "@Regression"
+        tags = "@TEST_EL-29"
 
 )
 public class TestRunner {

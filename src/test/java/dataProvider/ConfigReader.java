@@ -47,4 +47,12 @@ public class ConfigReader {
         if(userId != null) return userId;
         else throw new RuntimeException("user_Id not specified in the Configuration.properties file.");
     }
+
+    public String getEmail(){
+        return properties.getProperty("wrongEmail");
+    }
+
+    public String getPassword(){
+        return properties.getProperty("password");
+    }
 }

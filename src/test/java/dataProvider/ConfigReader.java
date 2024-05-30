@@ -49,7 +49,7 @@ public class ConfigReader {
     }
 
     public String getEmail(){
-        return properties.getProperty("wrongEmail");
+        return properties.getProperty("email");
     }
 
     public String getPassword(){

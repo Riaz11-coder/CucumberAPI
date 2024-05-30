@@ -66,16 +66,9 @@ public class EndPoints {
 
     }
 
-    public void LoginUser(LoginRequest loginRequest) {
-        Response response = request.body(loginRequest).post(Route.login());
-        if (response.statusCode() != HttpStatus.SC_OK)
-            throw new RuntimeException("Authentication Failed. Content of failed Response: " + response.toString() + " , Status Code : " + response.statusCode());
 
-        Token tokenResponse = response.body().jsonPath().getObject("$", Token.class);
-        request.header("Authorization", "Bearer " + tokenResponse.token);
-    }
     public IRestResponse<LoginResponse> AuthenticateUser(LoginRequest loginRequest){
-        Response response =request.body(loginRequest).post(Route.login());
+        Response response = request.body(loginRequest).post(Route.login());
         return new RestResponse<>(LoginResponse.class,response);
     }
 
